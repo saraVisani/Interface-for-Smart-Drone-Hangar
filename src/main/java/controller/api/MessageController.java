@@ -1,6 +1,8 @@
 package src.main.java.controller.api;
 
-public interface MessageController {
-    /* dare il tipo di pannello di riferimento */
+import src.main.java.util.Enum.PanelType;
 
+public interface MessageController {
+
+    public abstract PanelType getPanelType();
 }

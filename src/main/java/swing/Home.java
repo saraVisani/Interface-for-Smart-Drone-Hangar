@@ -1,10 +1,8 @@
 package src.main.java.swing;
 
-import javax.swing.JPanel;
-
 import src.main.java.controller.api.MainController;
 
-public class Home extends JPanel{
+public class Home {
     public Home(){
 
     }

@@ -1,5 +1,7 @@
 package src.main.java.controller.api;
 
+import src.main.java.util.Enum.PanelType;
+
 public interface MainController {
-    /* permette di dare indietro il controller giusto per panello */
+    MessageController getControllerFor(PanelType type);
 }
