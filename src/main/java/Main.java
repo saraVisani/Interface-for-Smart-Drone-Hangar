@@ -6,8 +6,7 @@ import src.main.java.swing.Home;
 public class Main {
 
     public static void main(String[] args) {
-        Home home = new Home();
         MainController controller = new MainControllerImpl();
-        home.setController(controller);
+        new Home(controller);
     }
 }
