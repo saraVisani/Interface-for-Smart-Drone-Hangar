@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = "Drone Hub Interface"
-include("app")
+include("src")
