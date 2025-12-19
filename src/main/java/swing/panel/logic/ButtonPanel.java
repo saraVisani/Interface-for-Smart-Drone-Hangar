@@ -8,7 +8,7 @@ import src.main.java.swing.panel.decoration.ButtonPlusLabel;
 
 public class ButtonPanel extends JPanel {
 
-    List<String> labels = List.of("TAKE OFF", "LANDING", "LOGS");
+    private List<String> labels = List.of("TAKE OFF", "LANDING", "LOGS");
 
     public ButtonPanel(OrdersControllerImpl controller) {
         setLayout(new GridBagLayout());
