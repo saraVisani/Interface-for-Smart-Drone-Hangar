@@ -6,13 +6,20 @@ import java.util.Map;
 import it.unibo.controller.api.MainController;
 import it.unibo.controller.api.MessageController;
 import it.unibo.util.Enum.PanelType;
+import jssc.SerialPortException;
 public class MainControllerImpl implements MainController{
 
     private final Map<PanelType, MessageController> registry = new HashMap<>();
 
     public MainControllerImpl() {
-        register(new MessageHandlerControllerImpl());
-        register(new OrdersControllerImpl());
+        SerialChannel serialChannel = null;
+        try {
+            serialChannel = new SerialChannel("COM3", 9600);
+        } catch (SerialPortException e) {
+            e.printStackTrace();
+        }
+        register(new MessageHandlerControllerImpl(serialChannel));
+        register(new OrdersControllerImpl(serialChannel));
     }
 
     private void register(MessageController controller) {
