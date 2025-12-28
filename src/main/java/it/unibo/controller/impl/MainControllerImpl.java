@@ -12,9 +12,9 @@ import jssc.SerialPortException;
 public class MainControllerImpl implements MainController{
 
     private final Map<PanelType, MessageController> registry = new HashMap<>();
+    private SerialChannel serialChannel = null;
 
     public MainControllerImpl() {
-        SerialChannel serialChannel = null;
         try {
             serialChannel = new SerialChannel("COM3", 9600);
         } catch (SerialPortException e) {
@@ -39,6 +39,15 @@ public class MainControllerImpl implements MainController{
             if (controller instanceof InputControllers inputController) {
                 inputController.updateLaunchOrder(order);
             }
+        }
+    }
+
+    @Override
+    public void close() {
+        try {
+            serialChannel.close();
+        } catch (SerialPortException e) {
+            e.printStackTrace();
         }
     }
 }

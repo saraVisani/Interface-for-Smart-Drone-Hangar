@@ -1,5 +1,8 @@
 package it.unibo.swing;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 
 import it.unibo.controller.api.MainController;
@@ -14,6 +17,16 @@ public class Home {
 
         Console mainPanel = new Console(controller);
         frame.add(mainPanel);
+
+        // Listener per chiusura finestra
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Funzioni di pulizia
+                mainPanel.stopUpdateTimer();   // stop del timer Swing
+                controller.close();            // eventuale metodo per chiudere risorse
+            }
+        });
 
         frame.setVisible(true);
     }

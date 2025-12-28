@@ -15,6 +15,8 @@ import it.unibo.util.Enum.PanelType;
 
 public class Console extends ScrewPanel {
 
+    private ScreenPanel screen;
+
     public Console(MainController controller) {
         setLayout(new GridBagLayout());
         GridBagConstraints cMain = new GridBagConstraints();
@@ -49,7 +51,7 @@ public class Console extends ScrewPanel {
         row1.add(spacer1, c1);
 
         // Screen
-        ScreenPanel screen = new ScreenPanel(
+        screen = new ScreenPanel(
                 (MessageHandlerControllerImpl) controller.getControllerFor(PanelType.LOGS)
         );
         c1.gridx = 2;
@@ -120,5 +122,9 @@ public class Console extends ScrewPanel {
         cMain.weighty = 6.0;
         cMain.insets = new Insets(4, 0, 8, 0); // margini sopra e sotto della riga
         add(row2, cMain);
+    }
+
+    public void stopUpdateTimer() {
+        screen.stopUpdateTimer();
     }
 }

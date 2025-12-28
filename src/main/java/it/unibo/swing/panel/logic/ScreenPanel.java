@@ -11,6 +11,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import it.unibo.controller.impl.MessageHandlerControllerImpl;
 import it.unibo.swing.panel.decoration.TextPanel;
 import it.unibo.swing.panel.util.ScrewRoundPanel;
@@ -19,6 +23,7 @@ public class ScreenPanel extends ScrewRoundPanel {
 
     private TextPanel commands;
     private TextPanel logs;
+    private Timer updateTimer;
 
     public ScreenPanel(MessageHandlerControllerImpl controller) {
 
@@ -57,6 +62,16 @@ public class ScreenPanel extends ScrewRoundPanel {
 
         add(logs, c);
         controller.setScreenPanel(this);
+
+        // ---------- TIMER ----------
+        int interval = 210; // ms, perché Arduino invia ogni ~200ms
+        updateTimer = new Timer(interval, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.update(); // chiama update sul controller
+            }
+        });
+        updateTimer.start();
     }
 
     @Override
@@ -98,5 +113,11 @@ public class ScreenPanel extends ScrewRoundPanel {
 
     public TextPanel getCommandsPanel() {
         return commands;
+    }
+
+    public void stopUpdateTimer() {
+        if (updateTimer != null && updateTimer.isRunning()) {
+            updateTimer.stop();
+        }
     }
 }
